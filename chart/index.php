@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 
-<?php require_once '/../database.php';?>
+<?php require_once '../database.php';?>
 <!--MYSQL DATABASE-->
-<?php require_once '/../functions.php';?>
+<?php require_once '../functions.php';?>
 <!--MYSQL QUERIES-->
 <?php require_once 'chart.php';?>
 <!--MYSQL CHART QUERIES-->
