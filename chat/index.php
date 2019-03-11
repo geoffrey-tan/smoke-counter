@@ -25,12 +25,12 @@
     <header>
         <section>
             <!--(1) Iconmonstr-->
-            <a href="/"><img src="../assets/images/icons/back.svg" alt="back"></a>
+            <a href="/smokecounter"><img src="../assets/images/icons/back.svg" alt="back"></a>
         </section>
         <h1>Assistant Chat</h1>
         <section>
             <!--(1) Iconmonstr-->
-            <a href="/chart"><img src="../assets/images/icons/chart.svg" alt="chart"></a>
+            <a href="/smokecounter/chart"><img src="../assets/images/icons/chart.svg" alt="chart"></a>
         </section>
     </header>
 
@@ -52,9 +52,9 @@
     <!--SCRIPTS-->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdn.rawgit.com/Foliotek/AjaxQ/master/ajaxq.js"></script>
-    <script src="../assets/js/webapp.js"></script>
+    <script src="~/smokecounter/assets/js/webapp.js"></script>
     <!--WEBAPP - links stay in app-->
-    <script src="../assets/js/assistant.js"></script>
+    <script src="~/smokecounter/assets/js/assistant.js"></script>
     <!--CHAT SCRIPTS-->
 
     <!--SOURCE-->

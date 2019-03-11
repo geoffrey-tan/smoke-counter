@@ -28,12 +28,12 @@
     <header>
         <section>
             <!--(1) Iconmonstr-->
-            <a href="/"><img src="../assets/images/icons/back.svg" alt="back"></a>
+            <a href="/smokecounter"><img src="../assets/images/icons/back.svg" alt="back"></a>
         </section>
         <h1>Chart</h1>
         <section>
             <!--(1) Iconmonstr-->
-            <a href="/chart"><img src="../assets/images/icons/chart_a.svg" alt="chart"></a>
+            <a href="/smokecounter/chart"><img src="../assets/images/icons/chart_a.svg" alt="chart"></a>
         </section>
     </header>
 
@@ -92,7 +92,7 @@
 
     </section>
 
-    <a href="/chat"><button>Open Chat</button></a>
+    <a href="/smokecounter/chat"><button>Open Chat</button></a>
 
     <!--SCRIPTS-->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

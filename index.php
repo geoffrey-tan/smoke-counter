@@ -27,12 +27,12 @@
     <header>
         <section>
             <!--(1) Iconexperience-->
-            <a href="/"><img src="assets/images/icons/logo.svg" alt="logo"></a>
+            <a href="/smokecounter"><img src="assets/images/icons/logo.svg" alt="logo"></a>
         </section>
         <h1>Dashboard</h1>
         <section>
             <!--(2) Iconmonstr-->
-            <a href="/chart"><img src="assets/images/icons/chart.svg" alt="chart"></a>
+            <a href="/smokecounter/chart"><img src="assets/images/icons/chart.svg" alt="chart"></a>
         </section>
     </header>
 
@@ -82,7 +82,7 @@
 
     </section>
 
-    <a href="/chat"><button>Open Chat</button></a>
+    <a href="/smokecounter/chat"><button>Open Chat</button></a>
 
     <!--CONNECTION-->
     <span id='ipAddress' class="hidden"><?php echo $ashtrayIp ?></span>
