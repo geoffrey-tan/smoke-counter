@@ -1,113 +1,120 @@
 $(document).ready(function() {
-
-/*========================================================
+	/*========================================================
     VARIABLES
 ========================================================*/
 
-    var typing = false;
-    var context = 0;
-    var valueOne;
-    var valueTwo;
+	var typing = false;
+	var context = 0;
+	var valueOne;
+	var valueTwo;
 
-/*========================================================
+	/*========================================================
     FUNCTIONS
 ========================================================*/
 
-    function assistantCall(message) {
-        var data = {
-            message: $("#message").val()
-        };
+	function assistantCall(message) {
+		var data = {
+			message: $("#message").val()
+		};
 
-        alert("hi");
+		if (message !== undefined) {
+			data.message = message;
+		}
 
-        if (message !== undefined) {
-            data.message = message;
-        }
+		// Context for money
+		if (data.message.toLowerCase().indexOf("money") >= 0 || data.message.toLowerCase().indexOf("much") >= 0) {
+			// (4) Stackoverflow
+			context = 1;
+		} else if (context == 1 && data.message.match(/\d+/) > 0) {
+			var number = data.message.match(/\d+/);
+			valueOne = Math.round(number[0]);
+			context = 2;
+		} else if (context == 2 && data.message.match(/\d+/) > 0) {
+			var numberTwo = data.message.match(/\d+/);
+			valueTwo = Math.round(numberTwo[0]);
+			context = 3;
+		} else if (context == 3) {
+			valueOne = 0;
+			valueTwo = 0;
+			context = 0;
+		} else {
+			valueOne = 0;
+			valueTwo = 0;
+			context = 0;
+		}
 
-        // Context for money
-        if (data.message.toLowerCase().indexOf("money") >= 0 || data.message.toLowerCase().indexOf("much") >= 0) { // (4) Stackoverflow
-            context = 1;
-        } else if (context == 1 && data.message.match(/\d+/) > 0) {
-            var number = data.message.match(/\d+/);
-            valueOne = Math.round(number[0]);
-            context = 2;
-        } else if (context == 2 && data.message.match(/\d+/) > 0) {
-            var numberTwo = data.message.match(/\d+/);
-            valueTwo = Math.round(numberTwo[0]);
-            context = 3;
-        } else if (context == 3) {
-            valueOne = 0;
-            valueTwo = 0;
-            context = 0;
-        } else {
-            valueOne = 0;
-            valueTwo = 0;
-            context = 0;
-        }
+		if (data.message === "") {
+			$("#message").blur(); // (3) jQuery
 
-        if (data.message === "") {
-            $("#message").blur(); // (3) jQuery
+			return;
+		} else if (typing === true) {
+			$("#chat > section").append("<h2><strong class=\"self\">You</strong></h2><p>" + data.message + "</p>");
 
-            return;
-        } else if (typing === true) {
-            $("#chat > section").append("<h2><strong class=\"self\">You</strong></h2><p>" + data.message + "</p>");
+			$("#message").blur();
+			$("#myform")[0].reset();
 
-            $("#message").blur();
-            $("#myform")[0].reset();
+			return;
+		} else {
+			$("#chat > section").append("<h2><strong class=\"self\">You</strong></h2><p>" + data.message + "</p>");
 
-            return;
-        } else {
-            $("#chat > section").append("<h2><strong class=\"self\">You</strong></h2><p>" + data.message + "</p>");
+			typing = true;
 
-            typing = true;
+			$("#message").blur();
+			$("#myform")[0].reset(); // reset text
+		}
 
-            $("#message").blur();
-            $("#myform")[0].reset(); // reset text
-        }
+		$.post(
+			"assistant.php",
+			{ message: data.message, context: context, valueOne: valueOne, valueTwo: valueTwo },
+			function(result) {
+				// (2) jQuery
+				$("#chat > section").append(
+					"<h2 class=\"typing\"><strong>Assistant</strong></h2><p class=\"typing\">Typing ...</p>"
+				);
 
-        $.post("assistant.php", {message: data.message, context: context, valueOne: valueOne, valueTwo: valueTwo}, function(result) { // (2) jQuery
-            $("#chat > section").append("<h2 class=\"typing\"><strong>Assistant</strong></h2><p class=\"typing\">Typing ...</p>");
+				setTimeout(function() {
+					$(".typing").remove();
+					$("#chat > section").append(result);
 
-            setTimeout(function() {
-                $(".typing").remove();
-                $("#chat > section").append(result);
+					typing = false;
 
-                typing = false;
+					var chatScroll = $("#chat");
+					chatScroll.animate({ scrollTop: chatScroll.prop("scrollHeight") }, 1000); // (1) Stackoverflow
+				}, 1000);
 
-                var chatScroll = $("#chat");
-                chatScroll.animate({scrollTop: chatScroll.prop("scrollHeight")}, 1000); // (1) Stackoverflow
-            }, 1000);
+				var chatScroll = $("#chat");
+				chatScroll.animate({ scrollTop: chatScroll.prop("scrollHeight") }, 1000);
+			}
+		);
+	}
 
-            var chatScroll = $("#chat");
-            chatScroll.animate({scrollTop: chatScroll.prop("scrollHeight")}, 1000);
-        });
-    }
-
-/*========================================================
+	/*========================================================
     SCRIPTS
 ========================================================*/
 
-    $("#myform").on("submit", function() {
-        assistantCall();
+	$("#myform").on("submit", function() {
+		assistantCall();
 
-        return false; // (6) Stackoverflow
-    });
+		return false; // (6) Stackoverflow
+	});
 
-    $(document).on("click",".em", function() {
-        assistantCall($(this).html());
-    });
+	$(document).on("click", ".em", function() {
+		assistantCall($(this).html());
+	});
 
-    $(document).on("touchstart",".em",function() { // (5) Stackoverflow
-        assistantCall($(this).html());
-    });
+	$(document).on("touchstart", ".em", function() {
+		// (5) Stackoverflow
+		assistantCall($(this).html());
+	});
 
-    $("body").on("keydown", function() { // (7) Stackoverflow
-        var input = $("input[name=\"message\"]");
+	$("body").on("keydown", function() {
+		// (7) Stackoverflow
+		var input = $("input[name=\"message\"]");
 
-        if (!input.is(":focus")) {
-            input.focus();
-        }
-    });
+		if (!input.is(":focus")) {
+			input.focus();
+		}
+	});
 });
 
 /*========================================================

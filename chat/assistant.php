@@ -1,16 +1,16 @@
 <?php
-require_once('/../database.php'); // contains $link
+require_once '../database.php'; // contains $link
 
 /*========================================================
-    VARIABLES
+VARIABLES
 ========================================================*/
 
 $message = $_POST['message']; // (1) PHP Manual
 $context = $_POST['context'];
 $valuePostone = $_POST['valueOne'];
 $valuePosttwo = $_POST['valueTwo'];
-$intentValueone = NULL;
-$intentValuetwo = NULL;
+$intentValueone = null;
+$intentValuetwo = null;
 
 $intentGreeting = array("hi", "hello", "hey");
 $intentHelp = array("help");
@@ -19,10 +19,11 @@ $intentMost = array("smoke", "most");
 $intentLast = array("last", "time");
 
 /*========================================================
-    FUNCTIONS
+FUNCTIONS
 ========================================================*/
 
-function checkIntent($intent) {
+function checkIntent($intent)
+{
     global $message; // (3) Stackoverflow
     $temp = false;
 
@@ -37,7 +38,8 @@ function checkIntent($intent) {
     return $temp;
 }
 
-function sqlQuery($sql, $valueone, $valuetwo) {
+function sqlQuery($sql, $valueone, $valuetwo)
+{
     global $link;
     global $intentValueone;
     global $intentValuetwo;
@@ -45,7 +47,7 @@ function sqlQuery($sql, $valueone, $valuetwo) {
     $res = mysqli_query($link, $sql);
 
     if (mysqli_num_rows($res) > 0) {
-        while($row = mysqli_fetch_assoc($res)) {
+        while ($row = mysqli_fetch_assoc($res)) {
             $intentValueone = $row[$valueone];
             $intentValuetwo = $row[$valuetwo];
         }
@@ -55,7 +57,7 @@ function sqlQuery($sql, $valueone, $valuetwo) {
 }
 
 /*========================================================
-    SCRIPTS
+SCRIPTS
 ========================================================*/
 
 if ($context == 1) {
@@ -67,7 +69,7 @@ if ($context == 1) {
     sqlQuery($sqlMoney, "count", "count");
 
     $calc = $intentValueone / $valuePosttwo * $valuePostone;
-    $calcMoney = number_format((float)$calc, 2, ',', ''); // (6) Stackoverflow
+    $calcMoney = number_format((float) $calc, 2, ',', ''); // (6) Stackoverflow
 
     if ($calc < 30) {
         $resultCalc = "</p>";
@@ -82,7 +84,7 @@ if (checkIntent($intentGreeting) == true) {
     echo "<h2><strong>Assistant</strong></h2><p>Hi, you can type <span class='em'>help</span> to see what you can ask me! 😁  (blue keywords can be tapped)</p>";
 } elseif (checkIntent($intentHelp) == true) {
     echo "<h2><strong>Assistant</strong></h2><p>You can ask me:</p><p>When do I <span class='em'>smoke the most</span>?</p><p>How <span class='em'>much money</span> have I spent on cigarettes?</p><p>When was the <span class='em'>last time</span> I smoked a cigarette?</p>";
-} elseif(checkIntent($intentQuit) == true) {
+} elseif (checkIntent($intentQuit) == true) {
     echo "<h2><strong>Assistant</strong></h2><p>Yes</p>";
 } elseif (checkIntent($intentMost) == true) {
     $sqlMost = 'SELECT HOUR(date) AS hour, COUNT(*) AS count FROM geoffrey.cigarette WHERE date BETWEEN CURDATE() - INTERVAL 31 day AND CURDATE() GROUP BY HOUR(date) ORDER BY `count` DESC LIMIT 1';
@@ -105,7 +107,7 @@ if (checkIntent($intentGreeting) == true) {
 }
 
 /*========================================================
-    SOURCE
+SOURCE
 ========================================================*/
 
 // (1) http://php.net/manual/en/reserved.variables.post.php
@@ -114,5 +116,3 @@ if (checkIntent($intentGreeting) == true) {
 // (4) https://stackoverflow.com/questions/15305278/php-how-to-check-if-a-string-contain-any-text
 // (5) https://stackoverflow.com/questions/588892/can-you-exit-a-loop-in-php
 // (6) https://stackoverflow.com/questions/4483540/php-show-a-number-to-2-decimal-places
-
-?>
