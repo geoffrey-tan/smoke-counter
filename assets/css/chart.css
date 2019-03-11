@@ -1,0 +1,21 @@
+body > header section:nth-of-type(1) a img { /*overwrite*/
+    width: 1em;
+    margin-right: 3em;
+}
+
+body > a button {
+    position: fixed;
+    bottom: 0;
+    background: #FF6A6A;
+    font-size: 1em;
+    color: #F8F7EE;
+    text-align: center;
+    line-height: 2.125em;
+    height: 2.125em;
+    width: 100%;
+    border-style: initial;
+}
+
+body > section > section {
+    margin-top: 2em;
+}

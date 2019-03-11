@@ -1,0 +1,71 @@
+body > header section:nth-of-type(1) a img { /*overwrite*/
+    width: 1em;
+    margin-right: 3em;
+}
+
+h2 {
+    padding-bottom: 0.125em;
+}
+
+#chat {
+    overflow: scroll;
+    height: 83%; /*No scrollbar*/
+}
+
+#chat p {
+    padding-bottom: 0.625em;
+}
+
+.typing {
+    font-style: italic;
+}
+
+h2.typing {
+    font-style: normal;
+}
+
+.self {
+    color: #337AB7;
+}
+
+.em {
+    color: #337AB7;
+}
+
+em {
+    color: #337AB7;
+}
+
+input[type=text] {
+    padding-left: 1.500em;
+    font-size: 1em;
+    color: #767474;
+}
+
+input[type="submit"] {
+    background: #FF6A6A;
+    color: #F8F7EE;
+    font-size: 1.375em;
+}
+
+fieldset {
+    position: fixed;
+    bottom: 0;
+    background: #F8F7EE;
+    width: 100%;
+}
+
+fieldset > form {
+    display: flex;
+    height: 2.125em;
+}
+
+fieldset > form > input {
+    flex-grow: 1;
+    flex-basis: 0; /*Child - Even width*/
+}
+
+#message {
+    flex-grow: 4;
+    flex-basis: 0; /*Child - Even width*/
+}
