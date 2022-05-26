@@ -1,0 +1,23 @@
+{
+  "name": "smoke-counter",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Smokecounter",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server public/",
+    "update": "npx npm-check-updates --target minor --interactive && npm i",
+    "update:check": "npx npm-check-updates --deprecated",
+    "update:latest": "npx npm-check-updates --interactive && npm i"
+  },
+  "homepage": "https://github.com/geoffrey-tan/smoke-counter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geoffrey-tan/smoke-counter.git"
+  },
+  "author": "Geoffrey Tan",
+  "license": "MIT",
+  "keywords": [
+    "php"
+  ]
+}
