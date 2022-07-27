@@ -1,15 +1,8 @@
 {
   "name": "smoke-counter",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
   "description": "Smokecounter",
-  "main": "index.js",
-  "scripts": {
-    "start": "npx http-server public/",
-    "update": "npx npm-check-updates --target minor --interactive && npm i",
-    "update:check": "npx npm-check-updates --deprecated",
-    "update:latest": "npx npm-check-updates --interactive && npm i"
-  },
   "homepage": "https://github.com/geoffrey-tan/smoke-counter#readme",
   "repository": {
     "type": "git",
@@ -17,11 +10,26 @@
   },
   "author": "Geoffrey Tan",
   "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.6.1",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.3",
+    "typescript": "4.7.4"
+  },
   "keywords": [
     "php"
-  ],
-  "devDependencies": {
-    "webpack": "5.72.1",
-    "webpack-cli": "4.9.2"
-  }
+  ]
 }
